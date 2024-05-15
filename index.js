@@ -30,6 +30,15 @@ db.run(`CREATE TABLE IF NOT EXISTS entries (
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://nouhi.dev');
+    // You can also allow requests from any origin using '*':
+    // res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 app.get("/fetch", (req, res, next) => {
     // Fetch data from SQLite database
     db.all("SELECT * FROM entries", (err, rows) => {
