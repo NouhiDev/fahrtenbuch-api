@@ -4,7 +4,11 @@ const express = require("express");
 const sqlite3 = require("sqlite3").verbose();
 
 const app = express();
-
+const cors = require(cors)
+let corsOptions = {
+    origin : ['https://nouhi.dev'],
+ }
+ app.use(cors(corsOptions)) 
 const PORT = process.env.PORT || 5001;
 
 const db = new sqlite3.Database("your_database_name.db", err => {
